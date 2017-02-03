@@ -85,6 +85,7 @@ function App() {
     return _react2.default.createElement(
         'div',
         null,
+        'test11==',
         _react2.default.createElement(Clock, null),
         _react2.default.createElement(ActionLink, null),
         _react2.default.createElement(Toggle, null),
@@ -101,7 +102,7 @@ function ActionLink() {
     return _react2.default.createElement(
         'a',
         { href: '#', onClick: handleClick },
-        'Click me'
+        'Click me22233'
     );
 }
 
@@ -220,6 +221,7 @@ var LoginControl = function (_React$Component3) {
                 'div',
                 null,
                 _react2.default.createElement(Greeting, { isLoggedIn: isLoggedIn }),
+                button,
                 button
             );
         }
@@ -228,7 +230,211 @@ var LoginControl = function (_React$Component3) {
     return LoginControl;
 }(_react2.default.Component);
 
-_reactDom2.default.render(_react2.default.createElement(App, null), document.getElementById('root'));
+var FlavorForm = function (_React$Component4) {
+    _inherits(FlavorForm, _React$Component4);
+
+    function FlavorForm(props) {
+        _classCallCheck(this, FlavorForm);
+
+        var _this5 = _possibleConstructorReturn(this, (FlavorForm.__proto__ || Object.getPrototypeOf(FlavorForm)).call(this, props));
+
+        _this5.state = { value: 'coconut' };
+
+        _this5.handleChange = _this5.handleChange.bind(_this5);
+        _this5.handleSubmit = _this5.handleSubmit.bind(_this5);
+
+        return _this5;
+    }
+
+    _createClass(FlavorForm, [{
+        key: 'handleChange',
+        value: function handleChange(event) {
+            this.setState({ value: event.target.value });
+        }
+    }, {
+        key: 'handleSubmit',
+        value: function handleSubmit(event) {
+            alert('Your favoriate flavor is ' + this.state.value);
+            event.preventDefault();
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                'form',
+                { onSubmit: this.handleSubmit },
+                _react2.default.createElement(
+                    'label',
+                    null,
+                    'Pick your favorite La Croix flavor:',
+                    _react2.default.createElement(
+                        'select',
+                        { value: this.state.value, onChange: this.handleChange },
+                        _react2.default.createElement(
+                            'option',
+                            { value: 'grapefruit' },
+                            'Grapfruit'
+                        ),
+                        _react2.default.createElement(
+                            'option',
+                            { value: 'lime' },
+                            'lime'
+                        ),
+                        _react2.default.createElement(
+                            'option',
+                            { value: 'coconut' },
+                            'coconut'
+                        ),
+                        _react2.default.createElement(
+                            'option',
+                            { value: 'mango' },
+                            'mango'
+                        )
+                    )
+                ),
+                _react2.default.createElement('input', { type: 'submit', value: 'Submit' })
+            );
+        }
+    }]);
+
+    return FlavorForm;
+}(_react2.default.Component);
+
+var scaleNames = {
+    c: 'Celsius',
+    f: 'Fahrenheit'
+};
+
+function toCelsius(fahrenheit) {
+    return (fahrenheit - 32) * 5 / 9;
+}
+
+function toFahrenheit(celsius) {
+    return celsius * 9 / 5 + 32;
+}
+
+function tryConvert(value, convert) {
+    var input = parseFloat(value);
+    if (Number.isNaN(input)) {
+        return '';
+    }
+    var output = convert(input);
+    var rounded = Math.round(output * 1000) / 1000;
+    return rounded.toString();
+}
+
+var TemperatureInput = function (_React$Component5) {
+    _inherits(TemperatureInput, _React$Component5);
+
+    function TemperatureInput(props) {
+        _classCallCheck(this, TemperatureInput);
+
+        var _this6 = _possibleConstructorReturn(this, (TemperatureInput.__proto__ || Object.getPrototypeOf(TemperatureInput)).call(this, props));
+
+        _this6.handleChange = _this6.handleChange.bind(_this6);
+        return _this6;
+    }
+
+    _createClass(TemperatureInput, [{
+        key: 'handleChange',
+        value: function handleChange(e) {
+            this.props.onChange(e.target.value);
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            var value = this.props.value;
+            var scale = this.props.scale;
+            return _react2.default.createElement(
+                'fieldset',
+                null,
+                _react2.default.createElement(
+                    'legend',
+                    null,
+                    ' Enter temperature in ',
+                    scaleNames[scale],
+                    ': '
+                ),
+                _react2.default.createElement('input', { value: value, onChange: this.handleChange })
+            );
+        }
+    }]);
+
+    return TemperatureInput;
+}(_react2.default.Component);
+
+function BoilingVerdict(props) {
+    if (props.celsius >= 100) {
+        return _react2.default.createElement(
+            'p',
+            null,
+            'The water would boil.'
+        );
+    }
+    return _react2.default.createElement(
+        'p',
+        null,
+        'The water would not boil.'
+    );
+}
+
+var Calculator = function (_React$Component6) {
+    _inherits(Calculator, _React$Component6);
+
+    function Calculator(props) {
+        _classCallCheck(this, Calculator);
+
+        var _this7 = _possibleConstructorReturn(this, (Calculator.__proto__ || Object.getPrototypeOf(Calculator)).call(this, props));
+
+        _this7.handleCelsiusChange = _this7.handleCelsiusChange.bind(_this7);
+        _this7.handleFahrenheitChange = _this7.handleFahrenheitChange.bind(_this7);
+        _this7.state = { value: '', scale: 'c' };
+        return _this7;
+    }
+
+    _createClass(Calculator, [{
+        key: 'handleCelsiusChange',
+        value: function handleCelsiusChange(value) {
+            var obj = { scale: 'c', value: value };
+            console.log(obj);
+            this.setState(obj);
+        }
+    }, {
+        key: 'handleFahrenheitChange',
+        value: function handleFahrenheitChange(value) {
+            var obj = { scale: 'f', value: value };
+            console.log(obj);
+            this.setState({ scale: 'f', value: value });
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            var scale = this.state.scale;
+            var value = this.state.value;
+            var celsius = scale === 'f' ? tryConvert(value, toCelsius) : value;
+            var fahrenheit = scale === 'c' ? tryConvert(value, toFahrenheit) : value;
+
+            return _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement(TemperatureInput, {
+                    scale: 'c',
+                    value: celsius,
+                    onChange: this.handleCelsiusChange }),
+                _react2.default.createElement(TemperatureInput, {
+                    scale: 'f',
+                    value: fahrenheit,
+                    onChange: this.handleFahrenheitChange }),
+                _react2.default.createElement(BoilingVerdict, {
+                    celsius: parseFloat(celsius) })
+            );
+        }
+    }]);
+
+    return Calculator;
+}(_react2.default.Component);
+
+_reactDom2.default.render(_react2.default.createElement(Calculator, null), document.getElementById('root'));
 },{"react":178,"react-dom":27}],2:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};

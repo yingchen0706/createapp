@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "node_modules\\.bin\\babel src -d lib && node_modules\\.bin\\browserify lib\\test.js -o bundle.js"
+    "build": "node_modules\\.bin\\babel src -d lib && node_modules\\.bin\\browserify lib\\test.js -o test.js"
   },
   "repository": {
     "type": "git",
@@ -22,5 +22,10 @@
     "babel-preset-es2015": "^6.18.0",
     "babel-preset-react": "^6.16.0",
     "browserify": "^13.3.0"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2",
+    "gulp-browserify": "^0.5.1"
   }
 }
